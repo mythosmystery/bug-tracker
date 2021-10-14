@@ -16,6 +16,7 @@ const userSchema = new Schema({
       type: String,
       required: true,
    },
+   bugs: [{ type: Schema.Types.ObjectId, ref: 'Bug' }],
 });
 
 // hash user password

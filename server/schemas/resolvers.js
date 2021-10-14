@@ -1,9 +1,18 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Bug } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
    Query: {
+      bugs: async () => {
+         return Bug.find();
+      },
+      bug: async (parent, { bugId }) => {
+         return Bug.findOne({ _id: bugId });
+      },
+
+      /////////////////////////
+
       users: async () => {
          return User.find();
       },
