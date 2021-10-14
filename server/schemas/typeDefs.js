@@ -32,7 +32,8 @@ const typeDefs = gql`
    type Query {
       bugs: [Bug]!
       bug(bugId: ID!): Bug
-      bugsByUser(userId: ID!): [Bug]!
+      bugsByUser(userId: ID!): [Bug]
+      bugsBySoftware(softwareTitle: String!): [Bug]
 
       users: [User]!
       user(userId: ID!): User

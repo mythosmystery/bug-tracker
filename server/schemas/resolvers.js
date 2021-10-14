@@ -5,28 +5,49 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
    Query: {
       bugs: async () => {
-         return Bug.find();
+         return Bug.find().populate('reportedBy');
       },
       bug: async (parent, { bugId }) => {
-         return Bug.findOne({ _id: bugId });
+         return Bug.findOne({ _id: bugId }).populate('reportedBy');
+      },
+      bugsByUser: async (parent, { userId }) => {
+         return Bug.find({ reportedBy: userId }).populate('reportedBy');
+      },
+      bugsBySoftware: async (parent, { softwareTitle }) => {
+         return Bug.find({ softwareTitle }).populate('reportedBy');
       },
 
       /////////////////////////
 
       users: async () => {
-         return User.find();
+         return User.find().populate('bugs');
       },
       user: async (parent, { userId }) => {
-         return User.findOne({ _id: userId });
+         return User.findOne({ _id: userId }).populate('bugs');
       },
       me: async (parent, args, { user }) => {
          if (user) {
-            return User.findOne({ _id: user._id });
+            return User.findOne({ _id: user._id }).populate('bugs');
          }
          throw new AuthenticationError('You need to be logged in');
       },
    },
    Mutation: {
+      addBug: async (parent, { bug }, { user }) => {
+         const newBug = await Bug.create({ ...bug, reportedBy: user._id });
+         await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { bugs: newBug._id } }, { new: true });
+         return bug;
+      },
+      removeBug: async (parent, { bugId }, { user }) => {
+         try {
+            await Bug.deleteOne({ _id: bugId, postedBy: user._id });
+            await User.findOneAndUpdate({ _id: user._id }, { $pull: { bugs: bugId } }, { new: true });
+            return 'remove ok';
+         } catch (err) {
+            return err;
+         }
+      },
+
       addUser: async (parent, { username, email, password }) => {
          const user = await User.create({ username, email, password });
          const token = signToken(user);
