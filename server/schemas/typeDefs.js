@@ -6,7 +6,8 @@ const typeDefs = gql`
       replicate: String
       errorMessage: String
       softwareTitle: String
-      version: Float
+      version: String
+      status: String
    }
    type User {
       _id: ID
@@ -20,7 +21,8 @@ const typeDefs = gql`
       replicate: String
       errorMessage: String
       softwareTitle: String
-      version: Float
+      version: String
+      status: String
       date: Float
       reportedBy: User
    }

@@ -13,7 +13,10 @@ const bugSchema = new Schema({
       type: String,
    },
    version: {
-      type: Number,
+      type: String,
+   },
+   status: {
+      type: String,
    },
    date: {
       type: Date,

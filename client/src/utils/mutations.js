@@ -1,4 +1,13 @@
 import { gql } from '@apollo/client';
+export const ADD_BUG = gql`
+   mutation addBug($bug: BugInput!) {
+      addBug(bug: $bug) {
+         _id
+         description
+         softwareTitle
+      }
+   }
+`;
 export const LOGIN_USER = gql`
    mutation login($email: String!, $password: String!) {
       login(email: $email, password: $password) {

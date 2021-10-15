@@ -5,6 +5,20 @@ export const GET_ME = gql`
          _id
          email
          username
+         bugs {
+            _id
+            description
+            replicate
+            errorMessage
+            softwareTitle
+            version
+            status
+            date
+            reportedBy {
+               _id
+               username
+            }
+         }
       }
    }
 `;

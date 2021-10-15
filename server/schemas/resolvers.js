@@ -36,7 +36,7 @@ const resolvers = {
       addBug: async (parent, { bug }, { user }) => {
          const newBug = await Bug.create({ ...bug, reportedBy: user._id });
          await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { bugs: newBug._id } }, { new: true });
-         return bug;
+         return newBug;
       },
       removeBug: async (parent, { bugId }, { user }) => {
          try {
