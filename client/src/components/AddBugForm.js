@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_BUG } from '../utils/mutations';
 const AddBugForm = ({ refetch }) => {
-   const defaultState = { description: '', replicate: '', errorMessage: '', softwareTitle: '', version: 0, status: 'reported' };
+   const defaultState = { description: '', replicate: '', errorMessage: '', softwareTitle: '', version: '', status: 'reported' };
    const [formData, setFormData] = useState(defaultState);
    const [validated] = useState(false);
    const [showAlert, setShowAlert] = useState(false);
@@ -100,10 +100,15 @@ const AddBugForm = ({ refetch }) => {
 
             <Form.Group>
                <Form.Label htmlFor="version">Version</Form.Label>
-               <Form.Control type="input" placeholder="version" name="version" onChange={handleInputChange} value={formData.version} />
+               <Form.Control type="input" placeholder="1.00" name="version" onChange={handleInputChange} value={formData.version} />
             </Form.Group>
 
-            <Button disabled={!formData} type="submit" variant="success">
+            <Button
+               className="my-2"
+               disabled={!formData.description && !formData.softwareTitle && !formData.errorMessage}
+               type="submit"
+               variant="success"
+            >
                Submit
             </Button>
          </Form>
