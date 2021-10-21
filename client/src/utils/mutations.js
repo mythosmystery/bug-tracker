@@ -1,10 +1,37 @@
 import { gql } from '@apollo/client';
+export const REMOVE_BUG = gql`
+   mutation removeBug($bugId: ID!) {
+      removeBug(bugId: $bugId) {
+         _id
+         username
+         email
+         bugs {
+            _id
+            description
+            replicate
+            errorMessage
+            softwareTitle
+            version
+            date
+         }
+      }
+   }
+`;
 export const ADD_BUG = gql`
    mutation addBug($bug: BugInput!) {
       addBug(bug: $bug) {
          _id
-         description
-         softwareTitle
+         username
+         email
+         bugs {
+            _id
+            description
+            replicate
+            errorMessage
+            softwareTitle
+            version
+            date
+         }
       }
    }
 `;
@@ -16,6 +43,15 @@ export const LOGIN_USER = gql`
             _id
             username
             email
+            bugs {
+               _id
+               description
+               replicate
+               errorMessage
+               softwareTitle
+               version
+               date
+            }
          }
       }
    }

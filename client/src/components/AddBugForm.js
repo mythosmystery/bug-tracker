@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_BUG } from '../utils/mutations';
+import { UserContext } from '../utils/UserContext';
 const AddBugForm = ({ refetch }) => {
    const defaultState = { description: '', replicate: '', errorMessage: '', softwareTitle: '', version: '', status: 'reported' };
    const [formData, setFormData] = useState(defaultState);
    const [validated] = useState(false);
    const [showAlert, setShowAlert] = useState(false);
    const [addBug] = useMutation(ADD_BUG);
+   const { user, setUser } = useContext(UserContext);
 
    const handleInputChange = event => {
       const { name, value } = event.target;
@@ -30,7 +32,7 @@ const AddBugForm = ({ refetch }) => {
                bug: { ...formData },
             },
          });
-         refetch();
+         setUser(data.addBug);
       } catch (err) {
          console.error(err);
          setShowAlert(true);

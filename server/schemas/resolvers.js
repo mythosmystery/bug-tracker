@@ -35,14 +35,13 @@ const resolvers = {
    Mutation: {
       addBug: async (parent, { bug }, { user }) => {
          const newBug = await Bug.create({ ...bug, reportedBy: user._id });
-         await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { bugs: newBug._id } }, { new: true });
-         return newBug;
+         return await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { bugs: newBug._id } }, { new: true }).populate('bugs');
       },
+      updateBug: async (parent, { bug }, { user }) => {},
       removeBug: async (parent, { bugId }, { user }) => {
          try {
             await Bug.deleteOne({ _id: bugId, postedBy: user._id });
-            await User.findOneAndUpdate({ _id: user._id }, { $pull: { bugs: bugId } }, { new: true });
-            return 'remove ok';
+            return await User.findOneAndUpdate({ _id: user._id }, { $pull: { bugs: bugId } }, { new: true }).populate('bugs');
          } catch (err) {
             return err;
          }
@@ -54,7 +53,7 @@ const resolvers = {
          return { token, user };
       },
       login: async (parent, { email, password }) => {
-         const user = await User.findOne({ email });
+         const user = await User.findOne({ email }).populate('bugs');
          if (!user) {
             throw new AuthenticationError('No user found');
          }

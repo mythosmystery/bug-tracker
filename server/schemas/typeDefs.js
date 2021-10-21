@@ -42,8 +42,9 @@ const typeDefs = gql`
       me: User
    }
    type Mutation {
-      addBug(bug: BugInput!): Bug
-      removeBug(bugId: ID!): String
+      addBug(bug: BugInput!): User
+      updateBug(bug: BugInput!): User
+      removeBug(bugId: ID!): User
 
       login(email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth

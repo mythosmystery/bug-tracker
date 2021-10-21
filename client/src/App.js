@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { Container } from 'react-bootstrap';
+import { UserContext } from './utils/UserContext';
 import Auth from './utils/auth';
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import { addUser, getUser } from './utils/localStorage';
 
 const httpLink = createHttpLink({
    uri: '/graphql',
@@ -29,14 +31,22 @@ const client = new ApolloClient({
 });
 
 function App() {
-   const homePage = Auth.loggedIn() ? Profile : Home;
+   const [user, setUserState] = useState(Auth.loggedIn() ? getUser() : null);
+   const setUser = user => {
+      setUserState(user);
+      addUser(user);
+   };
+   const value = useMemo(() => ({ user, setUser }), [user, setUserState]);
    return (
       <ApolloProvider client={client}>
          <Router>
-            <Navbar />
-            <Container>
-               <Route exact path="/" component={homePage} />
-            </Container>
+            <UserContext.Provider value={value}>
+               <Navbar />
+               <Container>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/profile" component={Profile} />
+               </Container>
+            </UserContext.Provider>
          </Router>
       </ApolloProvider>
    );
