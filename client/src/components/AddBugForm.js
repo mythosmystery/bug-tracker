@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_BUG } from '../utils/mutations';
 import { UserContext } from '../utils/UserContext';
 const AddBugForm = ({ refetch }) => {
-   const defaultState = { description: '', replicate: '', errorMessage: '', softwareTitle: '', version: '', status: 'reported' };
+   const defaultState = { description: '', replicate: '', errorMessage: '', softwareTitle: '', version: '', status: 'Reported' };
    const [formData, setFormData] = useState(defaultState);
    const [validated] = useState(false);
    const [showAlert, setShowAlert] = useState(false);

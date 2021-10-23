@@ -21,9 +21,6 @@ const AppNavbar = () => {
                      <Nav.Link as={Link} to="/">
                         Home
                      </Nav.Link>
-                     <Nav.Link as={Link} to="/profile">
-                        Profile
-                     </Nav.Link>
                      {Auth.loggedIn() ? (
                         <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                      ) : (

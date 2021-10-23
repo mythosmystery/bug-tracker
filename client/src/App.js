@@ -37,14 +37,14 @@ function App() {
       addUser(user);
    };
    const value = useMemo(() => ({ user, setUser }), [user, setUserState]);
+   const homePage = Auth.loggedIn() ? Profile : Home;
    return (
       <ApolloProvider client={client}>
          <Router>
             <UserContext.Provider value={value}>
                <Navbar />
                <Container>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/profile" component={Profile} />
+                  <Route exact path="/" component={homePage} />
                </Container>
             </UserContext.Provider>
          </Router>

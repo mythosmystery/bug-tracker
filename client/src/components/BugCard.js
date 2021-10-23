@@ -1,12 +1,12 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import RemoveBugButton from './RemoveBugButton';
+import EditStatusButton from './EditStatusButton';
 const BugCard = ({ bug }) => {
    return (
       <Card className="my-2">
          <Card.Header>
-            Status: {bug.status}
-            <Button className="mx-2">Edit</Button>
+            <EditStatusButton bug={bug}></EditStatusButton>
          </Card.Header>
          <Card.Body>
             <Card.Title>{bug.softwareTitle}</Card.Title>

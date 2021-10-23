@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
    input BugInput {
+      _id: ID
       description: String
       replicate: String
       errorMessage: String
