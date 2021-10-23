@@ -86,6 +86,16 @@ export const ADD_USER = gql`
             _id
             username
             email
+            bugs {
+               _id
+               description
+               replicate
+               errorMessage
+               softwareTitle
+               version
+               date
+               status
+            }
          }
       }
    }

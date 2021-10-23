@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import RemoveBugButton from './RemoveBugButton';
 import EditStatusButton from './EditStatusButton';
+import EditBugButton from './EditBugButton';
 const BugCard = ({ bug }) => {
    return (
       <Card className="my-2">
@@ -16,6 +17,7 @@ const BugCard = ({ bug }) => {
          </Card.Body>
          <Card.Footer>
             Version: {bug.version}
+            <EditBugButton bug={bug}></EditBugButton>
             <RemoveBugButton bugId={bug._id}></RemoveBugButton>
          </Card.Footer>
       </Card>

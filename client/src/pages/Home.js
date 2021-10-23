@@ -6,7 +6,6 @@ const Home = () => {
    return (
       <Container>
          <h2>Home Page</h2>
-         <pre>{JSON.stringify(user, null, 2)}</pre>
       </Container>
    );
 };

@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { UserContext } from '../utils/UserContext';
 
-const SignupForm = () => {
+const SignupForm = ({ handleModalClose }) => {
    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
    const [validated] = useState(false);
    const [showAlert, setShowAlert] = useState(false);
    const [addUser] = useMutation(ADD_USER);
+   const { setUser } = useContext(UserContext);
 
-   const handleInputChange = (event) => {
+   const handleInputChange = event => {
       const { name, value } = event.target;
       setUserFormData({ ...userFormData, [name]: value });
    };
 
-   const handleFormSubmit = async (event) => {
+   const handleFormSubmit = async event => {
       event.preventDefault();
 
       // check if form has everything (as per react-bootstrap docs)
@@ -29,7 +31,9 @@ const SignupForm = () => {
          const { data } = await addUser({
             variables: { ...userFormData },
          });
+         setUser(data.addUser.user);
          Auth.login(data.addUser.token);
+         handleModalClose();
       } catch (err) {
          console.error(err);
          setShowAlert(true);

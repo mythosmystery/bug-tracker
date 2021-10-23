@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { UserContext } from '../utils/UserContext';
 import AddBugModal from '../modals/AddBugModal';
 import BugCard from '../components/BugCard';
@@ -11,13 +11,19 @@ const Profile = () => {
    }
    return (
       <>
-         <h2>My Bugs</h2>
-         <Button onClick={() => setShowBugModal(true)}>Report Bug</Button>
+         <Button className="my-2" onClick={() => setShowBugModal(true)}>
+            Report Bug
+         </Button>
          <AddBugModal showModal={showBugModal} onHide={() => setShowBugModal(false)}></AddBugModal>
-
-         {user.bugs.map(bug => {
-            return <BugCard bug={bug} key={bug._id}></BugCard>;
-         })}
+         <Row>
+            {user.bugs.map(bug => {
+               return (
+                  <Col lg={6}>
+                     <BugCard bug={bug} key={bug._id}></BugCard>
+                  </Col>
+               );
+            })}
+         </Row>
       </>
    );
 };

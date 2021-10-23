@@ -5,7 +5,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { UserContext } from '../utils/UserContext';
 
-const LoginForm = () => {
+const LoginForm = ({ handleModalClose }) => {
    const [userFormData, setUserFormData] = useState({ email: '', password: '' });
    const [validated] = useState(false);
    const [showAlert, setShowAlert] = useState(false);
@@ -33,6 +33,7 @@ const LoginForm = () => {
          });
          setUser(data.login.user);
          Auth.login(data.login.token, data.login.user);
+         handleModalClose();
       } catch (err) {
          console.error(err);
          setShowAlert(true);
@@ -69,7 +70,7 @@ const LoginForm = () => {
                />
                <Form.Control.Feedback type="invalid">Password is required!</Form.Control.Feedback>
             </Form.Group>
-            <Button disabled={!(userFormData.email && userFormData.password)} type="submit" variant="success">
+            <Button className="my-2" disabled={!(userFormData.email && userFormData.password)} type="submit" variant="success">
                Submit
             </Button>
          </Form>
