@@ -21,7 +21,7 @@ const Profile = () => {
          </div>
          <AddBugModal showModal={showBugModal} onHide={() => setShowBugModal(false)}></AddBugModal>
          <Row>
-            {user.bugs.map(bug => {
+            {user.bugs.reverse().map(bug => {
                return (
                   <Col lg={6}>
                      <BugCard bug={bug} key={bug._id}></BugCard>
