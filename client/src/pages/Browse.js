@@ -1,22 +1,45 @@
 import { useQuery } from '@apollo/client';
-import { Row, Col } from 'react-bootstrap';
+import { storeKeyNameFromField } from '@apollo/client/utilities';
+import { useState } from 'react';
+import { Row, Col, DropdownButton, Dropdown, Button } from 'react-bootstrap';
 import BugCard from '../components/BugCard';
 import { ALL_BUGS } from '../utils/queries';
 
 const Browse = () => {
    const { data, loading, error, refetch } = useQuery(ALL_BUGS);
+   const [filterState, setFilterState] = useState(null);
+   const handleClick = ({ target }) => {
+      setFilterState(target.innerText);
+   };
    if (loading || error) {
       return <h5>loading...</h5>;
    }
    return (
       <>
          <h1 className="text-center">Browse Bugs</h1>
+         <Row className="">
+            <Col className="flex">
+               <DropdownButton title={filterState || 'Filter'} className="my-2">
+                  <Dropdown.Item onClick={handleClick}>Reported</Dropdown.Item>
+                  <Dropdown.Item onClick={handleClick}>Need more information</Dropdown.Item>
+                  <Dropdown.Item onClick={handleClick}>In progress</Dropdown.Item>
+                  <Dropdown.Item onClick={handleClick}>Fixed</Dropdown.Item>
+               </DropdownButton>
+            </Col>
+            <Col sm={1}>
+               <Button onClick={() => setFilterState(null)} variant="warning" className="my-2">
+                  Clear
+               </Button>
+            </Col>
+         </Row>
          <Row>
             {data.bugs.map(bug => {
-               return (
+               return bug.status === filterState || !filterState ? (
                   <Col lg={6}>
-                     <BugCard bug={bug} key={bug._id} refetch={refetch} />
+                     <BugCard key={bug._id} bug={bug} refetch={refetch} />
                   </Col>
+               ) : (
+                  <></>
                );
             })}
          </Row>
