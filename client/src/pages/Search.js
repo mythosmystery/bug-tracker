@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { SEARCH_BUGS } from '../utils/queries';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, InputGroup, Row, Col, DropdownButton, Dropdown, Button } from 'react-bootstrap';
 import BugCard from '../components/BugCard';
 import { FaSearch, FaFilter } from 'react-icons/fa';
@@ -46,7 +46,7 @@ const Search = () => {
                   <InputGroup.Text>
                      <FaSearch />
                   </InputGroup.Text>
-                  <Form.Control type="content" placeholder="Search for software..." name="softwareTitle" onChange={onChange} />
+                  <Form.Control type="content" placeholder="Search for software..." name="softwareTitle" value={searchValue} onChange={onChange} />
                </InputGroup>
             </Form.Group>
          </Form>

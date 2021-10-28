@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { storeKeyNameFromField } from '@apollo/client/utilities';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Row, Col, DropdownButton, Dropdown, Button } from 'react-bootstrap';
 import BugCard from '../components/BugCard';
 import { ALL_BUGS } from '../utils/queries';
@@ -11,6 +11,9 @@ const Browse = () => {
    const handleClick = ({ target }) => {
       setFilterState(target.innerText);
    };
+   useEffect(() => {
+      refetch();
+   }, []);
    if (loading || error) {
       return <h5>loading...</h5>;
    }
