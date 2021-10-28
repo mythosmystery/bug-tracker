@@ -19,7 +19,8 @@ const BugCard = ({ bug, refetch }) => {
             <Card.Text>Version: {bug.version}</Card.Text>
          </Card.Body>
          <Card.Footer>
-            Reported: {datePosted}
+            <p>Reported at: {datePosted}</p>
+            {bug.reportedBy.username ? <p>Reported by: {bug.reportedBy.username}</p> : <></>}
             <EditBugButton bug={bug}></EditBugButton>
             <RemoveBugButton bug={bug} refetch={refetch}></RemoveBugButton>
          </Card.Footer>
