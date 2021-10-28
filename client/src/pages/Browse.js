@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { Row, Col } from 'react-bootstrap';
 import BugCard from '../components/BugCard';
 import { ALL_BUGS } from '../utils/queries';
 
@@ -9,10 +10,16 @@ const Browse = () => {
    }
    return (
       <>
-         <h1>Browse Bugs</h1>
-         {data.bugs.map(bug => {
-            return <BugCard bug={bug} key={bug._id} refetch={refetch} />;
-         })}
+         <h1 className="text-center">Browse Bugs</h1>
+         <Row>
+            {data.bugs.map(bug => {
+               return (
+                  <Col lg={6}>
+                     <BugCard bug={bug} key={bug._id} refetch={refetch} />
+                  </Col>
+               );
+            })}
+         </Row>
       </>
    );
 };

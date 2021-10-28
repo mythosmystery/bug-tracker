@@ -3,6 +3,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 import { UserContext } from '../utils/UserContext';
 import AddBugModal from '../modals/AddBugModal';
 import BugCard from '../components/BugCard';
+import { FaBug } from 'react-icons/fa';
 const Profile = () => {
    const [showBugModal, setShowBugModal] = useState(false);
    const { user } = useContext(UserContext);
@@ -11,9 +12,13 @@ const Profile = () => {
    }
    return (
       <>
-         <Button className="my-2" onClick={() => setShowBugModal(true)}>
-            Report Bug
-         </Button>
+         <h4 className="text-center my-3">Welcome, {user.username}!</h4>
+         <div className="text-center">
+            <Button className="my-2" onClick={() => setShowBugModal(true)}>
+               <FaBug className="mx-2" />
+               Report Bug
+            </Button>
+         </div>
          <AddBugModal showModal={showBugModal} onHide={() => setShowBugModal(false)}></AddBugModal>
          <Row>
             {user.bugs.map(bug => {

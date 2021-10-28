@@ -50,7 +50,7 @@ const AddBugForm = ({ defaultState, mutation, onSubmit, handleModalClose }) => {
             <Form.Group>
                <Form.Label htmlFor="description">Description</Form.Label>
                <Form.Control
-                  type="text"
+                  as="textarea"
                   placeholder="Description of the problem"
                   name="description"
                   onChange={handleInputChange}
@@ -63,7 +63,7 @@ const AddBugForm = ({ defaultState, mutation, onSubmit, handleModalClose }) => {
             <Form.Group>
                <Form.Label htmlFor="replicate">Replicate</Form.Label>
                <Form.Control
-                  type="text"
+                  as="textarea"
                   placeholder="How to replicate the bug"
                   name="replicate"
                   onChange={handleInputChange}
