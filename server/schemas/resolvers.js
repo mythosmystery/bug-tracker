@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
    Query: {
       bugs: async () => {
-         return Bug.find().populate('reportedBy');
+         return Bug.find().populate('reportedBy').sort({ date: -1 });
       },
       bug: async (parent, { bugId }) => {
          return Bug.findOne({ _id: bugId }).populate('reportedBy');
@@ -14,7 +14,9 @@ const resolvers = {
          return Bug.find({ reportedBy: userId }).populate('reportedBy');
       },
       bugsBySoftware: async (parent, { softwareTitle }) => {
-         return Bug.find({ softwareTitle: { $regex: softwareTitle, $options: 'i' } }).populate('reportedBy');
+         return Bug.find({ softwareTitle: { $regex: softwareTitle, $options: 'i' } })
+            .populate('reportedBy')
+            .sort({ date: -1 });
       },
 
       /////////////////////////
