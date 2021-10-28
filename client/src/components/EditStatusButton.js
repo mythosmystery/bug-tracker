@@ -5,7 +5,7 @@ import { UPDATE_BUG } from '../utils/mutations';
 import { UserContext } from '../utils/UserContext';
 const EditStatusButton = ({ bug }) => {
    const [updateBug] = useMutation(UPDATE_BUG);
-   const { setUser } = useContext(UserContext);
+   const { user, setUser } = useContext(UserContext);
    const handleClick = async ({ target }) => {
       try {
          const { data } = await updateBug({
@@ -26,6 +26,10 @@ const EditStatusButton = ({ bug }) => {
          console.log(err);
       }
    };
+
+   if (user?._id != bug.reportedBy._id) {
+      return <h2 className="text-primary">{bug.status}</h2>;
+   }
    return (
       <DropdownButton title={bug.status}>
          <Dropdown.Item onClick={handleClick}>Reported</Dropdown.Item>

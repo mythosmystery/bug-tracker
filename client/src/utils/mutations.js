@@ -14,6 +14,10 @@ export const UPDATE_BUG = gql`
             version
             date
             status
+            reportedBy {
+               _id
+               username
+            }
          }
       }
    }
@@ -33,6 +37,10 @@ export const REMOVE_BUG = gql`
             version
             date
             status
+            reportedBy {
+               _id
+               username
+            }
          }
       }
    }
@@ -52,6 +60,10 @@ export const ADD_BUG = gql`
             version
             date
             status
+            reportedBy {
+               _id
+               username
+            }
          }
       }
    }
@@ -73,6 +85,10 @@ export const LOGIN_USER = gql`
                version
                date
                status
+               reportedBy {
+                  _id
+                  username
+               }
             }
          }
       }
@@ -95,6 +111,10 @@ export const ADD_USER = gql`
                version
                date
                status
+               reportedBy {
+                  _id
+                  username
+               }
             }
          }
       }

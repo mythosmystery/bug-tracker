@@ -14,7 +14,7 @@ const resolvers = {
          return Bug.find({ reportedBy: userId }).populate('reportedBy');
       },
       bugsBySoftware: async (parent, { softwareTitle }) => {
-         return Bug.find({ softwareTitle }).populate('reportedBy');
+         return Bug.find({ softwareTitle: { $regex: softwareTitle, $options: 'i' } }).populate('reportedBy');
       },
 
       /////////////////////////
@@ -38,12 +38,12 @@ const resolvers = {
          return await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { bugs: newBug._id } }, { new: true }).populate('bugs');
       },
       updateBug: async (parent, { bug }, { user }) => {
-         const updatedBug = await Bug.findOneAndUpdate({ _id: bug._id }, { ...bug }, { new: true });
+         const updatedBug = await Bug.findOneAndUpdate({ _id: bug._id }, { ...bug }, { new: true }).populate('reportedBy');
          return await User.findOneAndUpdate({ _id: user._id }, { $addToSet: { bugs: updatedBug._id } }, { new: true }).populate('bugs');
       },
       removeBug: async (parent, { bugId }, { user }) => {
          try {
-            await Bug.deleteOne({ _id: bugId, postedBy: user._id });
+            await Bug.deleteOne({ _id: bugId });
             return await User.findOneAndUpdate({ _id: user._id }, { $pull: { bugs: bugId } }, { new: true }).populate('bugs');
          } catch (err) {
             return err;

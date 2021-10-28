@@ -4,7 +4,7 @@ import RemoveBugButton from './RemoveBugButton';
 import EditStatusButton from './EditStatusButton';
 import EditBugButton from './EditBugButton';
 import moment from 'moment';
-const BugCard = ({ bug }) => {
+const BugCard = ({ bug, refetch }) => {
    const datePosted = moment(bug.date).format('hh:mm a');
    return (
       <Card className="my-2">
@@ -21,7 +21,7 @@ const BugCard = ({ bug }) => {
          <Card.Footer>
             Reported: {datePosted}
             <EditBugButton bug={bug}></EditBugButton>
-            <RemoveBugButton bugId={bug._id}></RemoveBugButton>
+            <RemoveBugButton bug={bug} refetch={refetch}></RemoveBugButton>
          </Card.Footer>
       </Card>
    );
