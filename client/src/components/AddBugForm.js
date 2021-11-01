@@ -7,6 +7,8 @@ const AddBugForm = ({ defaultState, mutation, onSubmit, handleModalClose }) => {
    const [showAlert, setShowAlert] = useState(false);
    const { user, setUser } = useContext(UserContext);
 
+   let submitting = false;
+
    const handleInputChange = event => {
       const { name, value } = event.target;
       setFormData({ ...formData, [name]: value });
@@ -23,11 +25,12 @@ const AddBugForm = ({ defaultState, mutation, onSubmit, handleModalClose }) => {
       }
 
       try {
-         const { data } = await onSubmit({
+         const { data, loading } = await onSubmit({
             variables: {
                bug: { ...formData },
             },
          });
+         submitting = loading;
          setUser(data[mutation]);
          handleModalClose();
       } catch (err) {
@@ -104,7 +107,7 @@ const AddBugForm = ({ defaultState, mutation, onSubmit, handleModalClose }) => {
 
             <Button
                className="my-2"
-               disabled={!formData.description && !formData.softwareTitle && !formData.errorMessage}
+               disabled={(!formData.description && !formData.softwareTitle && !formData.errorMessage) || submitting}
                type="submit"
                variant="success"
             >
