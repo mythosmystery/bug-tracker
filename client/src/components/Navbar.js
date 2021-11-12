@@ -11,7 +11,7 @@ const AppNavbar = () => {
 
    return (
       <>
-         <Navbar bg='dark' variant='dark' expand='sm' sticky='top'>
+         <Navbar bg='secondary' variant='dark' expand='sm' sticky='top'>
             <Container fluid>
                <FaBug size='20' className='text-white mx-2' />
                <Navbar.Brand>Bug Tracker</Navbar.Brand>
