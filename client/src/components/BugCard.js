@@ -5,9 +5,9 @@ import EditStatusButton from './EditStatusButton';
 import EditBugButton from './EditBugButton';
 import moment from 'moment';
 const BugCard = ({ bug, refetch }) => {
-   const datePosted = moment(bug.date).format('hh:mm a');
+   const datePosted = moment(bug.date).format('hh:mm a on MM-DD-YY');
    return (
-      <Card className="my-2">
+      <Card className='my-2'>
          <Card.Header>
             <EditStatusButton bug={bug}></EditStatusButton>
          </Card.Header>

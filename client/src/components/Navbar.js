@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import AccountModal from '../modals/AccountModal';
 import Auth from '../utils/auth';
+import { FaBug } from 'react-icons/fa';
 
 const AppNavbar = () => {
    // set modal display state
@@ -10,21 +11,20 @@ const AppNavbar = () => {
 
    return (
       <>
-         <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+         <Navbar bg='dark' variant='dark' expand='sm' sticky='top'>
             <Container fluid>
-               <Navbar.Brand as={Link} to="/">
-                  Bug Tracker
-               </Navbar.Brand>
-               <Navbar.Toggle aria-controls="navbar" />
-               <Navbar.Collapse id="navbar">
-                  <Nav className="ml-auto">
-                     <Nav.Link as={Link} to="/">
+               <FaBug size='20' className='text-white mx-2' />
+               <Navbar.Brand>Bug Tracker</Navbar.Brand>
+               <Navbar.Toggle aria-controls='navbar' />
+               <Navbar.Collapse id='navbar' className='justify-content-end'>
+                  <Nav>
+                     <Nav.Link as={Link} to='/'>
                         Home
                      </Nav.Link>
-                     <Nav.Link as={Link} to="/search">
+                     <Nav.Link as={Link} to='/search'>
                         Search
                      </Nav.Link>
-                     <Nav.Link as={Link} to="/browse">
+                     <Nav.Link as={Link} to='/browse'>
                         Browse
                      </Nav.Link>
                      {Auth.loggedIn() ? (

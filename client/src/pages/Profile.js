@@ -12,10 +12,10 @@ const Profile = () => {
    }
    return (
       <>
-         <h4 className="text-center my-3">Welcome, {user.username}!</h4>
-         <div className="text-center">
-            <Button className="my-2" onClick={() => setShowBugModal(true)}>
-               <FaBug className="mx-2" />
+         <h4 className='text-center my-3'>Welcome, {user.username}!</h4>
+         <div className='text-center'>
+            <Button className='my-2' onClick={() => setShowBugModal(true)}>
+               <FaBug className='mx-2' />
                Report Bug
             </Button>
          </div>
@@ -23,7 +23,7 @@ const Profile = () => {
          <Row>
             {user.bugs.reverse().map(bug => {
                return (
-                  <Col lg={6}>
+                  <Col md={6}>
                      <BugCard bug={bug} key={bug._id}></BugCard>
                   </Col>
                );

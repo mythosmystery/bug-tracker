@@ -15,7 +15,7 @@ import Search from './pages/Search';
 import Browse from './pages/Browse';
 
 const httpLink = createHttpLink({
-   uri: '/graphql',
+   uri: '/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -23,14 +23,14 @@ const authLink = setContext((_, { headers }) => {
    return {
       headers: {
          ...headers,
-         authorization: Auth.getToken() ? `Bearer ${Auth.getToken()}` : '',
-      },
+         authorization: Auth.getToken() ? `Bearer ${Auth.getToken()}` : ''
+      }
    };
 });
 
 const client = new ApolloClient({
    link: authLink.concat(httpLink),
-   cache: new InMemoryCache(),
+   cache: new InMemoryCache()
 });
 
 function App() {
@@ -47,9 +47,9 @@ function App() {
             <UserContext.Provider value={value}>
                <Navbar />
                <Container>
-                  <Route exact path="/" component={homePage} />
-                  <Route exact path="/search" component={Search} />
-                  <Route exact path="/browse" component={Browse} />
+                  <Route exact path='/' component={homePage} />
+                  <Route exact path='/search' component={Search} />
+                  <Route exact path='/browse' component={Browse} />
                </Container>
             </UserContext.Provider>
          </Router>

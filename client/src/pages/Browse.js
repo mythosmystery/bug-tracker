@@ -19,10 +19,10 @@ const Browse = () => {
    }
    return (
       <>
-         <h1 className="text-center">Browse Bugs</h1>
-         <Row className="">
-            <Col className="flex">
-               <DropdownButton title={filterState || 'Filter'} className="my-2">
+         <h1 className='text-center display-4'>Browse Bugs</h1>
+         <Row className=''>
+            <Col className='flex'>
+               <DropdownButton title={filterState || 'Filter'} className='my-2'>
                   <Dropdown.Item onClick={handleClick}>Reported</Dropdown.Item>
                   <Dropdown.Item onClick={handleClick}>Need more information</Dropdown.Item>
                   <Dropdown.Item onClick={handleClick}>In progress</Dropdown.Item>
@@ -30,7 +30,7 @@ const Browse = () => {
                </DropdownButton>
             </Col>
             <Col sm={1}>
-               <Button onClick={() => setFilterState(null)} variant="warning" className="my-2">
+               <Button onClick={() => setFilterState(null)} variant='warning' className='my-2'>
                   Clear
                </Button>
             </Col>
@@ -38,7 +38,7 @@ const Browse = () => {
          <Row>
             {data.bugs.map(bug => {
                return bug.status === filterState || !filterState ? (
-                  <Col lg={6}>
+                  <Col md={6}>
                      <BugCard key={bug._id} bug={bug} refetch={refetch} />
                   </Col>
                ) : (

@@ -25,9 +25,9 @@ const Search = () => {
    };
    return (
       <>
-         <Row className="">
-            <Col className="flex">
-               <DropdownButton title={filterState || 'Filter'} className="my-2">
+         <Row className=''>
+            <Col className='flex'>
+               <DropdownButton title={filterState || 'Filter'} className='my-2'>
                   <Dropdown.Item onClick={handleClick}>Reported</Dropdown.Item>
                   <Dropdown.Item onClick={handleClick}>Need more information</Dropdown.Item>
                   <Dropdown.Item onClick={handleClick}>In progress</Dropdown.Item>
@@ -35,18 +35,24 @@ const Search = () => {
                </DropdownButton>
             </Col>
             <Col sm={1}>
-               <Button onClick={() => setFilterState(null)} variant="warning" className="my-2">
+               <Button onClick={() => setFilterState(null)} variant='warning' className='my-2'>
                   Clear
                </Button>
             </Col>
          </Row>
-         <Form className="my-3" onSubmit={onSubmit}>
+         <Form className='my-3' onSubmit={onSubmit}>
             <Form.Group>
                <InputGroup>
                   <InputGroup.Text>
                      <FaSearch />
                   </InputGroup.Text>
-                  <Form.Control type="content" placeholder="Search for software..." name="softwareTitle" value={searchValue} onChange={onChange} />
+                  <Form.Control
+                     type='content'
+                     placeholder='Search for software...'
+                     name='softwareTitle'
+                     value={searchValue}
+                     onChange={onChange}
+                  />
                </InputGroup>
             </Form.Group>
          </Form>
@@ -54,7 +60,7 @@ const Search = () => {
             {searchResults ? (
                searchResults.map(bug => {
                   return bug.status === filterState || !filterState ? (
-                     <Col lg={6}>
+                     <Col md={6}>
                         <BugCard key={bug._id} bug={bug} refetch={search} />
                      </Col>
                   ) : (
@@ -62,7 +68,7 @@ const Search = () => {
                   );
                })
             ) : (
-               <h4 className="text-center">No search results!</h4>
+               <h4 className='text-center display-6'>No search results!</h4>
             )}
          </Row>
       </>
