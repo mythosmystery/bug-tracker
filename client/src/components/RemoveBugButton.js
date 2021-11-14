@@ -33,7 +33,7 @@ const RemoveBugButton = ({ bug, refetch }) => {
             modalText='Do you wish remove this bug?'
          ></ConfirmModal>
          <Button
-            variant='danger'
+            variant='outline-danger'
             className='mx-2'
             onClick={() => setShowModal(true)}
             hidden={user?._id != bug.reportedBy._id}

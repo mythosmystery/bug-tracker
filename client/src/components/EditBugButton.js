@@ -10,6 +10,7 @@ const EditBugButton = ({ bug }) => {
    return (
       <>
          <Button
+            variant='outline-warning'
             className='mx-2 text-center'
             onClick={() => setShowModal(true)}
             hidden={user?._id != bug.reportedBy._id}
