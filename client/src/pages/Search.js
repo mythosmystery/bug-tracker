@@ -23,6 +23,7 @@ const Search = () => {
    const handleClick = ({ target }) => {
       setFilterState(target.innerText);
    };
+   console.log(searchResults);
    return (
       <>
          <Row className=''>
@@ -57,18 +58,20 @@ const Search = () => {
             </Form.Group>
          </Form>
          <Row>
-            {searchResults ? (
+            {searchResults?.length ? (
                searchResults.map(bug => {
                   return bug.status === filterState || !filterState ? (
-                     <Col md={6}>
-                        <BugCard key={bug._id} bug={bug} refetch={search} />
+                     <Col md={6} key={bug._id}>
+                        <BugCard bug={bug} refetch={search} />
                      </Col>
                   ) : (
                      <></>
                   );
                })
             ) : (
-               <h4 className='text-center display-6'>No search results!</h4>
+               <h4 className='text-center display-6'>
+                  {searchResults ? 'No search results!' : 'Search by software title'}
+               </h4>
             )}
          </Row>
       </>

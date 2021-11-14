@@ -14,7 +14,9 @@ const AppNavbar = () => {
          <Navbar bg='secondary' variant='dark' expand='sm' sticky='top'>
             <Container fluid>
                <FaBug size='20' className='text-white mx-2' />
-               <Navbar.Brand>Bug Tracker</Navbar.Brand>
+               <Navbar.Brand as={Link} to='/'>
+                  Bug Tracker
+               </Navbar.Brand>
                <Navbar.Toggle aria-controls='navbar' />
                <Navbar.Collapse id='navbar' className='justify-content-end'>
                   <Nav>

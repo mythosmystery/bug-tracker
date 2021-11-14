@@ -12,7 +12,7 @@ const Profile = () => {
    }
    return (
       <>
-         <h4 className='text-center my-3'>Welcome, {user.username}!</h4>
+         <h4 className='text-center my-3'>Welcome, {user.username}, here are the bugs you've reported!</h4>
          <div className='text-center'>
             <Button className='my-2' onClick={() => setShowBugModal(true)}>
                <FaBug className='mx-2' />
