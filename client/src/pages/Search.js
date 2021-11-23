@@ -36,7 +36,15 @@ const Search = () => {
                </DropdownButton>
             </Col>
             <Col sm={1}>
-               <Button onClick={() => setFilterState(null)} variant='warning' className='my-2'>
+               <Button
+                  onClick={() => {
+                     setFilterState(null);
+                     setSearchValue('');
+                     setSearchResults(null);
+                  }}
+                  variant='warning'
+                  className='my-2'
+               >
                   Clear
                </Button>
             </Col>
